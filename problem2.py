@@ -17,7 +17,7 @@ def ternary_search(arr: list[int], x: int) -> int:
     while l <= r:
         m1 = l + (r - l) // 3
         m2 = r - (r - l) // 3
-        
+ 
         if arr[m1] == x:
             return m1
 
@@ -47,8 +47,7 @@ if __name__ == "__main__":
     
     i = ternary_search(arr, x)
     print("The result of ternary search: i =", i)
-    print("The number at index i in arr is", arr[i])
-    print()
+    print("The number at index i in arr is", arr[i], '\n')
     
     # Test case where x is not in arr
     print("Test case where x is not in arr")
@@ -63,4 +62,6 @@ if __name__ == "__main__":
     i = ternary_search(arr, x)
     print("The result of ternary search: i =", i)  
     print("Checking by the in operator, is x in arr:", x in arr)
+
+
     
