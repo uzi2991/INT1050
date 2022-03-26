@@ -9,3 +9,4 @@ for i in range(2, 101):
         catalan[i] += catalan[j] * catalan[i - j - 1]
 
 catalanPrefix = list(itertools.accumulate(catalan, operator.add))
+
