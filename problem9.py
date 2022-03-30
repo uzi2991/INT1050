@@ -3,7 +3,7 @@ from count import catalanPrefix
 
 
 def balanceString(n: int)->None:
-    pair = n // 2  # The number of maximum pair
+    pair = n // 2  # The number of maximum pairs
     res = [''] * (2 * pair) # Store temporary answer
     count = 0 # The number of answers
 
@@ -16,7 +16,7 @@ def balanceString(n: int)->None:
         
         # found an answer, print it
         if openCount == closeCount:
-            print(*res, sep='')
+            print("".join(res))
             count += 1
         
         # cannot continue
