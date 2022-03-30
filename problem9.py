@@ -2,39 +2,49 @@ import timeit
 from count import catalanPrefix
 
 
-n = int(input("Enter n: "))
+def balanceString(n: int)->None:
+    pair = n // 2  # The number of maximum pair
+    res = [''] * (2 * pair) # Store temporary answer
+    count = 0 # The number of answers
 
-start = timeit.default_timer()
+    # helper function
+    # i: current index
+    # openCount: number of current open brackets
+    # closeCount: number of current close brackets
+    def gen(i, openCount, closeCount):
+        nonlocal count
+        
+        # found an answer, print it
+        if openCount == closeCount:
+            print(*res, sep='')
+            count += 1
+        
+        # cannot continue
+        if i >= 2 * pair or closeCount > openCount or openCount > closeCount + 2 * pair - i:
+            return
+        
+        # try an open bracket
+        res[i] = '('
+        gen(i + 1, openCount + 1, closeCount)
+        # try a close bracket
+        res[i] = ')'
+        gen(i + 1, openCount, closeCount + 1)
+        # reset
+        res[i] = ''
 
-pair = n // 2
-res = [''] * (2 * pair)
-count = 0
+    gen(0, 0, 0)
+    print(f"There are total {count} strings")
 
-def gen(i, openCount, closeCount):
-    global count
+    print(f"Checking by calculate Catalan numbers, there are {catalanPrefix[pair]} strings")
     
-    if openCount == closeCount:
-        print(*res, sep='')
-        count += 1
-    
-    if i >= 2 * pair or closeCount > openCount or openCount > closeCount + 2 * pair - i:
-        return
-    
-    res[i] = '('
-    gen(i + 1, openCount + 1, closeCount)
-    res[i] = ')'
-    gen(i + 1, openCount, closeCount + 1)
-    res[i] = ''
+if __name__ == "__main__":
+    n = int(input("Enter n: "))
 
-gen(0, 0, 0)
+    start = timeit.default_timer()
+    balanceString(n)
+    end = timeit.default_timer()
 
-end = timeit.default_timer()
+    print(f"Runtime: {end - start}s")
+        
 
-print(f"There are total {count} strings")
-
-print(f"Checking by calculate Catalan numbers, there are {catalanPrefix[pair]} strings")
-
-print(f"Runtime: {end - start}s")
-    
-
-    
+        
